@@ -18,7 +18,6 @@ class IBapi(EWrapper, EClient):
         EClient.__init__(self, self)
 
     def tickPrice(self, reqId, tickType, price, attrib):
-        print(attrib) # Temporarily here
         # 2 represents Ask price, 67 represents delayed Ask price
         if tickType == 67 and reqId == 1:
             print('The current ask price is: ', price)
