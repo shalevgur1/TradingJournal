@@ -3,10 +3,15 @@ from journal_manager import JournalManager
 
 
 class Trade:
+    # * All trade properties are string *
 
     trade_fields_attr = {}               # A dict that contains all the fields of a trade taken from Trade Log sheet
     journal_manager = None               # The Journal Manager object that handles all the interaction with the Journal
 
+    # Can give how many arguments that you want but arguments must
+    # be fields in the Trade_Log that has no sub-fields.
+    # To set a sub-field, give the values to the properties after the
+    # creation of an instance of trade object.
     def __init__(self, manager, **kwargs):
         # Setting exist and given Journal Manager
         self.journal_manager = manager
@@ -29,7 +34,7 @@ class Trade:
             if field_value is None:
                 # No sub-fields
                 setattr(self, field_key, None)
-                for given_key, given_value in kwargs.copy():
+                for given_key, given_value in kwargs.copy().items():
                     if given_key == field_key:
                         setattr(self, field_key, given_value)
                         del kwargs[given_key]
@@ -39,7 +44,7 @@ class Trade:
                 temp_dict = {}
                 for sub_field in field_value:
                     has_value = False
-                    for given_key, given_value in kwargs.copy():
+                    for given_key, given_value in kwargs.copy().items():
                         if given_key == sub_field:
                             temp_dict[sub_field] = given_value
                             del kwargs[given_key]
