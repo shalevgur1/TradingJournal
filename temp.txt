@@ -1,0 +1,25 @@
+rsion=4
+study("Trading Data")
+
+// Define the symbol you want to retrieve data for
+symbol = "AAPL"
+
+// Retrieve the historical data for the symbol
+data = history(symbol, "1D")
+
+// Print the trading data to the console
+for i = 0 to barssince(data)
+    date = tostring(time[i], "yyyy-MM-dd")
+    open = tostring(data[i, 1])
+    high = tostring(data[i, 2])
+    low = tostring(data[i, 3])
+    close = tostring(data[i, 4])
+    volume = tostring(data[i, 5])
+    printf("%s, %s, %s, %s, %s, %s", date, open, high, low, close, volume)
+	
+	
+	
+	
+	
+Hi all, I am trying to write PineScript code to extract trade data about my orders for a trading Journal SW. When finishing to write some function in a library script I got this error which I can't understand: "Cannot read properties of null (reading 'getToken')"
+Someone knows what can be the problem?
