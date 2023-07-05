@@ -48,7 +48,9 @@ def main():
     manager = JournalManager()
     #print(manager.trade_fields_tostring())
     trade = Trade(manager)
-    print(trade.trade_attr_tostring())
+    trade.Entry_Label = "hello"
+    print(trade.Stock)
+    #print(trade.trade_attr_tostring())
     print(trade.Entry_Label)
 
 

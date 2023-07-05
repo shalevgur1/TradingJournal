@@ -1,0 +1,53 @@
+openOrder
+0 272093,MSFT,STK,,0.0,?,,SMART,,USD,MSFT,NMS,False,,combo: 0,0,91605715: LMT SELL 1@338.250000 GTC <ibapi.order_state.OrderState object at 0x000002C5BC2F2100>
+orderStatus
+0 PreSubmitted 0.0 1.0 0.0 91605715 0 0.0 0 child 0.0
+openOrder
+0 272093,MSFT,STK,,0.0,?,,SMART,,USD,MSFT,NMS,False,,combo: 0,0,91605715: LMT SELL 1@338.250000 GTC <ibapi.order_state.OrderState object at 0x000002C5BC2F21C0>
+orderStatus
+0 PreSubmitted 0.0 1.0 0.0 91605715 0 0.0 0 child 0.0
+openOrder
+0 272093,MSFT,STK,,0.0,?,,SMART,,USD,MSFT,NMS,False,,combo: 0,0,91605714: STP SELL 1@0.000000 GTC <ibapi.order_state.OrderState object at 0x000002C5BC2F2250>
+orderStatus
+0 PreSubmitted 0.0 1.0 0.0 91605714 0 0.0 0 child,trigger 0.0
+openOrder
+0 272093,MSFT,STK,,0.0,?,,SMART,,USD,MSFT,NMS,False,,combo: 0,0,91605712: LMT BUY 1@338.160000 GTC <ibapi.order_state.OrderState object at 0x000002C5BC2F2190> 
+orderStatus
+0 Submitted 0.0 1.0 0.0 91605712 0 0.0 0  0.0
+openOrder
+0 272093,MSFT,STK,,0.0,?,,SMART,,USD,MSFT,NMS,False,,combo: 0,0,91605714: STP SELL 1@0.000000 GTC <ibapi.order_state.OrderState object at 0x000002C5BC2F22B0>  
+orderStatus
+0 PreSubmitted 0.0 1.0 0.0 91605714 0 0.0 0 child,trigger 0.0
+openOrder
+0 272093,MSFT,STK,,0.0,?,,SMART,,USD,MSFT,NMS,False,,combo: 0,0,91605714: STP SELL 1@0.000000 GTC <ibapi.order_state.OrderState object at 0x000002C5BC2F2070>  
+orderStatus
+0 PreSubmitted 0.0 1.0 0.0 91605714 0 0.0 0 child,trigger 0.0
+openOrder
+0 272093,MSFT,STK,,0.0,?,,SMART,,USD,MSFT,NMS,False,,combo: 0,0,91605715: LMT SELL 1@338.250000 GTC <ibapi.order_state.OrderState object at 0x000002C5BC2F21F0>orderStatus
+0 PreSubmitted 0.0 1.0 0.0 91605715 0 0.0 0 child 0.0
+execDetails
+-1 272093,MSFT,STK,,0.0,,,ISLAND,,USD,MSFT,NMS,False,,combo: ExecId: 00025b45.64a5a05b.01.01, Time: 20230705  22:59:59, Account: DU7374188, Exchange: ISLAND, Side: BOT, Shares: 1.000000, Price: 338.160000, PermId: 91605712, ClientId: 0, OrderId: 0, Liquidation: 0, CumQty: 1.000000, AvgPrice: 338.160000, OrderRef: , EvRule: , EvMultiplier: 0.000000, ModelCode: , LastLiquidity: 1
+openOrder
+0 272093,MSFT,STK,,0.0,?,,SMART,,USD,MSFT,NMS,False,,combo: 0,0,91605712: LMT BUY 1@338.160000 GTC <ibapi.order_state.OrderState object at 0x000002C5BC2E4DC0> 
+orderStatus
+0 Filled 1.0 0.0 338.16 91605712 0 338.16 0  0.0
+openOrder
+0 272093,MSFT,STK,,0.0,?,,SMART,,USD,MSFT,NMS,False,,combo: 0,0,91605714: STP SELL 1@0.000000 GTC <ibapi.order_state.OrderState object at 0x000002C5BC2F2400>  
+orderStatus
+0 PreSubmitted 0.0 1.0 0.0 91605714 0 0.0 0 trigger 0.0
+openOrder
+0 272093,MSFT,STK,,0.0,?,,SMART,,USD,MSFT,NMS,False,,combo: 0,0,91605715: LMT SELL 1@338.250000 GTC <ibapi.order_state.OrderState object at 0x000002C5BC2F23A0>orderStatus
+0 PreSubmitted 0.0 1.0 0.0 91605715 0 0.0 0  0.0
+openOrder
+0 272093,MSFT,STK,,0.0,?,,SMART,,USD,MSFT,NMS,False,,combo: 0,0,91605712: LMT BUY 1@338.160000 GTC <ibapi.order_state.OrderState object at 0x000002C5BC2F2460> 
+orderStatus
+0 Filled 1.0 0.0 338.16 91605712 0 338.16 0  0.0
+openOrder
+0 272093,MSFT,STK,,0.0,?,,SMART,,USD,MSFT,NMS,False,,combo: 0,0,91605715: LMT SELL 1@338.250000 GTC <ibapi.order_state.OrderState object at 0x000002C5BC2F2490>orderStatus
+0 Submitted 0.0 1.0 0.0 91605715 0 0.0 0  0.0
+openOrder
+0 272093,MSFT,STK,,0.0,?,,SMART,,USD,MSFT,NMS,False,,combo: 0,0,91605715: LMT SELL 1@338.250000 GTC <ibapi.order_state.OrderState object at 0x000002C5BC2F2430>orderStatus
+0 PreSubmitted 0.0 1.0 0.0 91605715 0 0.0 0  0.0
+openOrder
+0 272093,MSFT,STK,,0.0,?,,SMART,,USD,MSFT,NMS,False,,combo: 0,0,91605715: LMT SELL 1@338.250000 GTC <ibapi.order_state.OrderState object at 0x000002C5BC2F2370>orderStatus
+0 PreSubmitted 0.0 1.0 0.0 91605715 0 0.0 0  0.0

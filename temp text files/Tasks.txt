@@ -4,3 +4,4 @@
 4. Update real profit and loss value according to deal enter.
 5. List of trade colors.
 6. Add calendar and calendar reminders for changing SL after long time of not changing SL in TP deals that wating for SL.
+7. 
