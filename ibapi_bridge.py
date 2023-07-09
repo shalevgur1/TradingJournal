@@ -37,6 +37,7 @@ class IbapiClientBridge(EWrapper, EClient):
 
     api_data = queue.Queue()
 
+# Initialization of the IBapiClient & implementation of the connection and running of the client
     def __init__(self):
         EClient.__init__(self, self)
 
@@ -48,34 +49,36 @@ class IbapiClientBridge(EWrapper, EClient):
         # Override function for the client run function for
         # Start the socket connection in a different thread.
         # This wont interfir to the main block of the script
-        socket_thread = threading.Thread(target=lambda: super().run(), daemon=True)
+        socket_thread = threading.Thread(target=super(type(self), self).run, daemon=True)
         socket_thread.start()
         time.sleep(1)   # Sleep interval to allow time for connection to server
+    def _run_loop(self):
+        super().run()
 
 
-
+# All functions of EWrapper interfaces implementation
     def orderStatus(self, orderId: OrderId, status: str, filled: float, remaining: float, avgFillPrice: float, permId: int, parentId: int, lastFillPrice: float, clientId: int, whyHeld: str, mktCapPrice: float):
         print("\norderStatus")
-        print("OrderId: " + orderId)
-        print("Status: " + status)
-        print("filled: " + filled)
-        print("remaining: " + remaining)
-        print("avgFillPrice: " + avgFillPrice)
-        print("permId: " + permId)
-        print("parentId: " + parentId)
-        print("lastFillPrice: " + lastFillPrice)
-        print("clientId: " + clientId)
-        print("whyHeld: " + whyHeld)
-        print("mktCapPrice: " + mktCapPrice)
+        print("OrderId: ", orderId)
+        print("Status: ", status)
+        print("filled: ", filled)
+        print("remaining: ", remaining)
+        print("avgFillPrice: ", avgFillPrice)
+        print("permId: ", permId)
+        print("parentId: ", parentId)
+        print("lastFillPrice: ", lastFillPrice)
+        print("clientId: ", clientId)
+        print("whyHeld: ", whyHeld)
+        print("mktCapPrice: ", mktCapPrice)
         #print(orderId, status, filled, remaining, avgFillPrice, permId, parentId, lastFillPrice, clientId, whyHeld, mktCapPrice)
         pass
 
     def openOrder(self, orderId:OrderId, contract:Contract, order:Order, orderState:OrderState):
         print("\nopenOrder")
-        print("OrderId: " + orderId)
-        print("Contract: " + contract)
-        print("Order: " + order)
-        print("OrderState: " + orderState)
+        print("OrderId: ", orderId)
+        print("Contract: ", contract)
+        print("Order: ", order)
+        print("OrderState: ", orderState)
         print('\n')
         #print(orderId, contract, order, orderState)
         pass
@@ -89,6 +92,7 @@ class IbapiClientBridge(EWrapper, EClient):
         #print("ExecDetailsEnd. ReqId:", reqId)
         pass
 
+# API data Queue interaction
     def putApiData(self, data):
         self.api_data.put(data)
 
