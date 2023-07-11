@@ -35,7 +35,7 @@ def disconnect_IBClient():
     Function to disconnect the IBClient in securely
     """
     try:
-        IbapiClientBridge.disconnect()
+        IBapiClient.disconnect()
     except:
         print("IBClient has been already disconnected by different thread/process.")
 
@@ -58,9 +58,11 @@ def TypeExitLoop():
     Terminats the application securly.
     Activated in a seperate thread.
     """
-    print("\nEnter a command (type 'exit' to end session):\n")
     while running:
-        user_input = input("\nEnter a command (type 'exit' to end session):\n")
+        try:
+            user_input = input("\nEnter a command (type 'exit' to end session):\n")
+        except:
+            break
         if user_input == 'exit':
             break
         time.sleep(1) #Sleep interval to allow time for incoming price data
@@ -86,9 +88,9 @@ def JournalAppMain():
     global threads
 
     # Build all threads
-    main_thread = threading.Thread(target=MainApplicationLoop)
+    main_thread = threading.Thread(target=MainApplicationLoop, name="MainLoop")
     threads.append(main_thread)
-    type_exit_thread = threading.Thread(target=TypeExitLoop)
+    type_exit_thread = threading.Thread(target=TypeExitLoop, name="ExitLoop")
     threads.append(type_exit_thread)
     
     # Start all threads
