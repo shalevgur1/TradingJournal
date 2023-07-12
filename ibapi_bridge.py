@@ -25,21 +25,43 @@ from ibapi.execution import ExecutionFilter
 import queue
 import threading
 import time
+import enum
 
 
-# An implementaion of the EWrapper perant class.
-# The EWrapper is a callback interface for the EClient
-# that responsible (the EClient) for interacting with the
-# IB server and call the relevant method in the EWrapper to handle
-# the recieved data. Here I emplemnt callback methods and customize
-# them to my needs
+
+class MessageType():
+    """
+    An Enumaration of the IBAPI message types (different callback methods)
+    """
+    OPEN_ORDER = 1
+    ORDER_STATUS = 2
+
+
+
+
 class IbapiClientBridge(EWrapper, EClient):
+    """
+    An implementaion of the EWrapper perant class.
+    The EWrapper is a callback interface for the EClient
+    that responsible (the EClient) for interacting with the
+    IB server and call the relevant method in the EWrapper to handle
+    the recieved data. Here I emplemnt callback methods and customize
+    them to my needs
+    """
 
-    api_data = queue.Queue()
+    _api_data = queue.Queue()           # The Queue that has the API data in queue order
+    q_has_data = False                  # The flag that specify if the API data queue has data inside
 
-# Initialization of the IBapiClient & implementation of the connection and running of the client
+
     def __init__(self):
+        """
+        Initialization of the IBapiClient & implementation of the connection and running of the client
+        """
         EClient.__init__(self, self)
+
+    @property
+    def api_data(self):
+        return self._api_data
 
     def connect(self, host, port, clientId):
         # Here only to generate interface to the parent conect function
@@ -58,29 +80,50 @@ class IbapiClientBridge(EWrapper, EClient):
 
 # All functions of EWrapper interfaces implementation
     def orderStatus(self, orderId: OrderId, status: str, filled: float, remaining: float, avgFillPrice: float, permId: int, parentId: int, lastFillPrice: float, clientId: int, whyHeld: str, mktCapPrice: float):
-        print("\norderStatus")
-        print("OrderId: ", orderId)
-        print("Status: ", status)
-        print("filled: ", filled)
-        print("remaining: ", remaining)
-        print("avgFillPrice: ", avgFillPrice)
-        print("permId: ", permId)
-        print("parentId: ", parentId)
-        print("lastFillPrice: ", lastFillPrice)
-        print("clientId: ", clientId)
-        print("whyHeld: ", whyHeld)
-        print("mktCapPrice: ", mktCapPrice)
+        # print("\norderStatus")
+        # print("OrderId: ", orderId)
+        # print("Status: ", status)
+        # print("filled: ", filled)
+        # print("remaining: ", remaining)
+        # print("avgFillPrice: ", avgFillPrice)
+        # print("permId: ", permId)
+        # print("parentId: ", parentId)
+        # print("lastFillPrice: ", lastFillPrice)
+        # print("clientId: ", clientId)
+        # print("whyHeld: ", whyHeld)
+        # print("mktCapPrice: ", mktCapPrice)
         #print(orderId, status, filled, remaining, avgFillPrice, permId, parentId, lastFillPrice, clientId, whyHeld, mktCapPrice)
         pass
 
     def openOrder(self, orderId:OrderId, contract:Contract, order:Order, orderState:OrderState):
-        print("\nopenOrder")
-        print("OrderId: ", orderId)
-        print("Contract: ", contract)
-        print("Order: ", order)
-        print("OrderState: ", orderState)
-        print('\n')
-        #print(orderId, contract, order, orderState)
+        """ 
+        Every time the user enter a postion and submit one or more orders this function is used as an handle function 
+        and is activated by the client. 
+        * The trading system can send couple of messages with the same content. It is filtered here before the data
+        goes outsied to be handled by the main application loop.
+        """
+
+        new_message = True
+
+        # Filtering message duplicates 
+        for message in list(self._api_data.queue):
+             if(message[0] == MessageType.OPEN_ORDER and message[3].permId == order.permId):
+                 print("Message already exists")
+                 new_message = False
+        
+        if(new_message):
+            self._api_data.put([MessageType.OPEN_ORDER, orderId, contract, order, orderState])
+            self.q_has_data = True
+
+        print(self._api_data.qsize())
+
+
+        # print("\nopenOrder")
+        # print("OrderId: ", orderId)
+        # print("Contract: ", contract)
+        # print("Order: ", order)
+        # print("OrderState: ", orderState)
+        # print('\n')
         pass
 
     def execDetails(self, reqId:int, contract:Contract, execution:Execution):

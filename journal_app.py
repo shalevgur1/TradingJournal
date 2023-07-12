@@ -11,6 +11,7 @@ from ibapi_bridge import IbapiClientBridge # Bridge between the IB API and the a
 import time
 import threading
 import signal
+import queue
 
 
 
@@ -76,7 +77,16 @@ def MainApplicationLoop():
     The main part of the application.
     """
     while running:
+
         time.sleep(1)
+
+        # Constantly check if new message entered the API data queue
+        if(IBapiClient.q_has_data):
+            time.sleep(1)
+            while not IBapiClient.api_data.empty():
+                print(IBapiClient.api_data.get())
+
+                
     handle_termination()
 
 

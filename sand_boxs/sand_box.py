@@ -4,6 +4,7 @@ import shutil
 from journal_manager import JournalManager
 from trade import Trade
 import pandas as pd
+import queue
 
 
 journal_filename = "trading_journal.xlsx"
@@ -45,13 +46,15 @@ NUM_LINES_FIELD = 2 # Can't be modified only from here.
 
 
 def main():
-    manager = JournalManager()
+    pass
+
+    #manager = JournalManager()
     #print(manager.trade_fields_tostring())
-    trade = Trade(manager)
-    trade.Entry_Label = "hello"
-    print(trade.Stock)
+    #trade = Trade(manager)
+    #trade.Entry_Label = "hello"
+    #print(trade.Stock)
     #print(trade.trade_attr_tostring())
-    print(trade.Entry_Label)
+    #print(trade.Entry_Label)
 
 
 

@@ -8,11 +8,15 @@ class Trade:
     trade_fields_attr = {}               # A dict that contains all the fields of a trade taken from Trade Log sheet
     journal_manager = None               # The Journal Manager object that handles all the interaction with the Journal
 
-    # Can give how many arguments that you want but arguments must
-    # be fields in the Trade_Log that has no sub-fields.
-    # To set a sub-field, give the values to the properties after the
-    # creation of an instance of trade object.
+
     def __init__(self, manager, **kwargs):
+        """
+        Can give how many arguments that you want but arguments must
+        be fields in the Trade_Log that has no sub-fields.
+        To set a sub-field, give the values to the properties after the
+        creation of an instance of trade object.
+        """
+
         # Setting exist and given Journal Manager
         self.journal_manager = manager
 
@@ -25,10 +29,12 @@ class Trade:
         self._set_attributes(kwargs)
 
 
-    # Creates the Trade object attributes by Trade Log table fields
-    # Using a given dictionary of fields from the manager object.
-    # Using given values and keys for attributes as argument.
     def _set_attributes(self, kwargs):
+        """
+        Creates the Trade object attributes by Trade Log table fields
+        Using a given dictionary of fields from the manager object.
+        Using given values and keys for attributes as argument.
+        """
         for field_key, field_value in self.trade_fields_attr.items():
 
             if field_value is None:
