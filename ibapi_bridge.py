@@ -115,8 +115,6 @@ class IbapiClientBridge(EWrapper, EClient):
             self._api_data.put([MessageType.OPEN_ORDER, orderId, contract, order, orderState])
             self.q_has_data = True
 
-        print(self._api_data.qsize())
-
 
         # print("\nopenOrder")
         # print("OrderId: ", orderId)
