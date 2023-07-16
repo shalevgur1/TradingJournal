@@ -4,11 +4,14 @@ import shutil
 import pandas as pd
 
 
-# This Class is mange the Excel file Trading Journal
-# It do various of things:
-# 1. Building the Trading Journal
-# 2. Extracting and inserting data to the Journal.
+
 class JournalManager:
+    """
+    This Class is manege the Excel file Trading Journal
+    It do various of things:
+    1. Building the Trading Journal
+    2. Extracting and inserting data to the Journal.
+    """
 
     _DEFAULT_PATH = os.getcwd()                                         # Journal default path in the script directory
     _MODEL_PATH = os.getcwd() + r"\config\trading_journal_model.xlsx"   # Journal config/model file full path
@@ -32,8 +35,10 @@ class JournalManager:
 
 
 
-    # Building the journal in a given folder path if not exists already
     def build_journal(self, journal_file_path):
+        """
+        Building the journal in a given folder path if not exists already
+        """
         if os.path.isfile(journal_file_path):
             print("Trading Journal is already exists.")
         else:
@@ -42,26 +47,32 @@ class JournalManager:
             shutil.copy(self._MODEL_PATH, journal_file_path)
         self._journal_path = journal_file_path
 
-    # Pass the Journal to a different directory.
-    # DOES NOT DELETE THE OLD PATH FILE
     def transport_journal(self, new_path):
+        """
+        Pass the Journal to a different directory.
+        DOES NOT DELETE THE OLD PATH FILE
+        """
         if os.path.isfile(new_path):
             print("File already exists in given folder......")
         else:
             shutil.copy(self._journal_path, new_path)
 
-    # Reads the log table sheet in the
-    # Journal Excel file to a pandas dataFrame property
     def _read_log_table(self):
+        """
+        Reads the log table sheet in the
+        Journal Excel file to a pandas dataFrame property
+        """
         self._log_data = pd.read_excel(self._journal_path)
 
-    # This function is extracting the fields of a trade
-    # from the Excel Journal file.
-    # This is for convenience - when changing config file,
-    # everything will change accordingly
-    # Used in Trade Class
-    # Creating a dictionary of the fields.
     def _read_trade_fields(self):
+        """
+        This function is extracting the fields of a trade
+        from the Excel Journal file.
+        This is for convenience - when changing config file,
+        everything will change accordingly
+        Used in Trade Class
+        Creating a dictionary of the fields.
+        """
         self.check_read_log()
 
         dict_fields = {}
@@ -85,9 +96,11 @@ class JournalManager:
 
         self.trade_fields = dict_fields
 
-    # Creates a string from Trade Log table fields.
-    # Using the trade_fields Dictionary.
     def trade_fields_tostring(self):
+        """
+        Creates a string from Trade Log table fields.
+        Using the trade_fields Dictionary.
+        """
         fields_str = ''
         for key, value in self.trade_fields.items():
             fields_str = fields_str + key
@@ -99,8 +112,10 @@ class JournalManager:
 
         return fields_str
 
-    # Returns the index (row and col) of the first (upper left) field in the Log Table
     def get_start_fields_idx(self):
+        """
+        Returns the index (row and col) of the first (upper left) field in the Log Table
+        """
         self.check_read_log()
         idx_found = False
         start_row_idx, start_col_idx = None, None
@@ -115,9 +130,11 @@ class JournalManager:
                 break
         return start_row_idx, start_col_idx
 
-    # Check that the log data property has data and
-    # the log table sheet has been read.
     def check_read_log(self):
+        """
+        Check that the log data property has data and
+        the log table sheet has been read.
+        """
         if self._log_data is None or self._log_data.empty:
             raise ValueError("Log Table has not been read yet or log data is empty for some reason")
 
