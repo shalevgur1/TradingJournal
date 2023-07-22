@@ -1,10 +1,8 @@
 
-import yfinance as yf
+import journal_manager
 
 def main():
-    ticker = yf.Ticker('MSFT')
-    ticker.history(interval="1d")["Close"].iloc[-1]
-    print(round(ticker.history(interval="1d")["Close"].iloc[-1], 2))
+    pass
 
 
 

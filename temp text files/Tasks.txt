@@ -1,7 +1,12 @@
-1. update (days) field in Trade class.
-2. Finish interaction with IBapi tutorial.
-3. Build IBapi real interaction.
-4. Update real profit and loss value according to deal enter.
-5. List of trade colors.
-6. Add calendar and calendar reminders for changing SL after long time of not changing SL in TP deals that wating for SL.
-7. 
+1. Add Stop Loss price.
+1. Update Excel file to be more accurate with all data and colors.
+2. Add real time trading feature (when orders are closed during market time)
+3. Add saving data while not connected to the application.
+6. Add calendar and calendar reminders for changing SL after long time of not changing SL in TP deals that wating for SL and finencial reports dates.
+7. Learn FullStack - update the application to be a web page.
+
+
+webook automation for interactive brokers
+can activate the application nonstop
+
+Oren sent mail with question to Interactive

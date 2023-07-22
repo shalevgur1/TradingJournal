@@ -23,6 +23,7 @@ import queue
 # TWS Port: 7497    IBGW Port: 4002    ID: 0 (Master Client ID set to 0)
 CONNECTION_INFO = ('127.0.0.1', 7497, 0)
 IBapiClient = IbapiClientBridge()
+JournalManagerObj = JournalManager()
 QUEUE_RECIVE_TIME = 1       # Amount of time to queue to recive all data from IB Servers
 APP_DELAY_TIME = 1          # Amount app delay time for better performence (Not sure)
 
@@ -79,7 +80,7 @@ def MainApplicationLoop():
     Here all the base logic of the appliaction is running and the application is managed.
     The main part of the application.
     """
-    j = JournalManager()
+    
     while running:
         time.sleep(APP_DELAY_TIME)
 
@@ -94,9 +95,9 @@ def MainApplicationLoop():
                 messages.append(api_data)
             IBapiClient.q_has_data = False
 
-            t = Trade(j, messages)
-            #print(t.trade_attr_tostring())
+            t = Trade(JournalManagerObj, messages)
             print(t)
+            JournalManagerObj.write_trade(t)
 
 
 
