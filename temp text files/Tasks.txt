@@ -1,12 +1,26 @@
-1. Add Stop Loss price.
-1. Update Excel file to be more accurate with all data and colors.
+1. Create the calculator (or other better name) for manipulating the data - take it out of the trade class (more modular).
+Update Excel file to be more accurate with all data and colors.
 2. Add real time trading feature (when orders are closed during market time)
 3. Add saving data while not connected to the application.
 6. Add calendar and calendar reminders for changing SL after long time of not changing SL in TP deals that wating for SL and finencial reports dates.
 7. Learn FullStack - update the application to be a web page.
 
 
-webook automation for interactive brokers
+webhook automation for interactive brokers
 can activate the application nonstop
 
-Oren sent mail with question to Interactive
+
+Alternative to excel:
+Google Sheets: Google Sheets is a web-based spreadsheet application that allows multiple users to edit the same spreadsheet simultaneously. It supports real-time collaboration and provides features for version history, commenting, and sharing permissions.
+
+Microsoft Excel Online: Microsoft offers Excel Online as part of its Microsoft 365 suite. Similar to Google Sheets, Excel Online allows multiple users to collaborate in real-time on the same Excel workbook stored in OneDrive or SharePoint.
+
+Microsoft OneDrive: OneDrive is Microsoft's cloud storage service that allows users to store and collaborate on various types of files, including Excel workbooks. When multiple users work on the same Excel file stored in OneDrive, they can collaborate in real-time.
+
+Airtable: Airtable is a cloud-based collaboration platform that combines the features of a spreadsheet and a database. It enables real-time collaboration on tables that can store various types of data, and users can edit data simultaneously.
+
+Smartsheet: Smartsheet is a collaborative work management platform that offers features for real-time collaboration on spreadsheets, project management, and other types of work items.
+
+Zoho Sheet: Zoho Sheet is a cloud-based spreadsheet application that allows multiple users to collaborate on the same spreadsheet in real-time.
+
+Quip: Quip is a collaboration platform that includes real-time document editing, spreadsheets, and chat. It is designed for teams to work together efficiently on various types of content.

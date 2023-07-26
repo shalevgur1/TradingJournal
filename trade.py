@@ -83,6 +83,8 @@ class Trade:
                     for sell_order in sell_orders:
                         if sell_order.orderType == 'LMT':
                             self.Take_Profit.Price = sell_order.lmtPrice
+                        elif sell_order.orderType == 'STP':
+                            self.Stop_Loss.Price = sell_order.auxPrice
                 else:
                     # Short deal attributes
                     self.Entery.Position = 'SHORT'
@@ -93,8 +95,10 @@ class Trade:
                         self.Entery.Transmit_Price = buy_orders[0].lmtPrice
                     self.Entery.Amount = sell_orders[0].totalQuantity
                     for buy_order in buy_orders:
-                        if sell_order.orderType == 'LMT':
-                            self.Take_Profit.Price = sell_order.lmtPrice
+                        if buy_order.orderType == 'LMT':
+                            self.Take_Profit.Price = buy_order.lmtPrice
+                        elif buy_order.orderType == 'STP':
+                            self.Stop_Loss.Price = buy_order.auxPrice
 
     def _set_attributes(self, kwargs):
         """
