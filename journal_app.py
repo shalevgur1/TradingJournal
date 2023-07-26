@@ -9,6 +9,7 @@
 from ibapi_bridge import IbapiClientBridge # Bridge between the IB API and the application - save data in queue
 from trade import Trade                    # The Trade class which includes every trades data
 from journal_manager import JournalManager # The journal manager class which read and write to the Excel file
+from converter import Converter            # Class for manipulating different data types (for ex. IBAPI, trades)
 
 import time
 import threading
@@ -23,7 +24,10 @@ import queue
 # TWS Port: 7497    IBGW Port: 4002    ID: 0 (Master Client ID set to 0)
 CONNECTION_INFO = ('127.0.0.1', 7497, 0)
 IBapiClient = IbapiClientBridge()
+
 JournalManagerObj = JournalManager()
+ConverterObj = Converter(JournalManagerObj)
+
 QUEUE_RECIVE_TIME = 1       # Amount of time to queue to recive all data from IB Servers
 APP_DELAY_TIME = 1          # Amount app delay time for better performence (Not sure)
 
@@ -95,9 +99,9 @@ def MainApplicationLoop():
                 messages.append(api_data)
             IBapiClient.q_has_data = False
 
-            t = Trade(JournalManagerObj, messages)
+            t = ConverterObj.IBAPI_to_trade(messages)
             print(t)
-            JournalManagerObj.write_trade(t)
+            #JournalManagerObj.write_trade(t)
 
 
 

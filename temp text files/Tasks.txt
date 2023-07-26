@@ -4,6 +4,8 @@ Update Excel file to be more accurate with all data and colors.
 3. Add saving data while not connected to the application.
 6. Add calendar and calendar reminders for changing SL after long time of not changing SL in TP deals that wating for SL and finencial reports dates.
 7. Learn FullStack - update the application to be a web page.
+8. Fix connection error to TWS bug - try to connect again every few seconds.
+9. Clean journal_manager from not relevant python packages which not in real use
 
 
 webhook automation for interactive brokers
