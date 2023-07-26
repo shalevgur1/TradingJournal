@@ -6,6 +6,11 @@ Update Excel file to be more accurate with all data and colors.
 7. Learn FullStack - update the application to be a web page.
 8. Fix connection error to TWS bug - try to connect again every few seconds.
 9. Clean journal_manager from not relevant python packages which not in real use
+10. Check that .vscode is not existing in github
+
+
+
+_find_next_row
 
 
 webhook automation for interactive brokers

@@ -2,7 +2,7 @@
 import os
 import shutil
 import pandas as pd
-import openpyxl
+import xlwings as xw
 
 # from trade import Trade # Creates a circular import
 
@@ -26,8 +26,9 @@ class JournalManager:
     _log_data = None                    # The log table data from log sheet in the Journal file
     trade_fields = {}                   # A dict that contains all the fields of a trade taken from Trade Log sheet
 
-    _trade_journal = None
-    _trade_log_sheet = None
+    _excel_app = None                        # The Excel application object
+    _journal_workbook = None                 # Trade Journal Excel Workbook obeject
+    _log_sheet = None                  # Trade Log Excel Sheet object
     _first_col_log = ''                      # The first col of the Trade Log - char value
     _first_empty_row_log = 5                 # The last empty row to start write trades too. By default the first row in the Journal (change in the init)
 
@@ -67,8 +68,10 @@ class JournalManager:
         self._journal_path = journal_file_path
 
         # Initialize the trade_journal object and different sheets that is used to interact with the Journal
-        self._trade_journal = openpyxl.load_workbook(self._journal_path)
-        self._trade_log_sheet = self._trade_journal["Trade Log"]
+        # self._excel_app_object = xw.App(visible=False) # If necessary to initialize the excel application
+        self._journal_workbook = xw.Book(journal_file_path)
+        self._log_sheet = self._journal_workbook.sheets["Trade Log"]
+
 
     def transport_journal(self, new_path):
         """
@@ -126,8 +129,8 @@ class JournalManager:
         counter = self._first_empty_row_log  # Initialized to the first row
         while True:
             cell_name = self._first_col_log + str(counter)
-            cell = self._trade_log_sheet[cell_name]
-            if not cell.value:
+            cell_value = self._log_sheet.range(cell_name).value
+            if not cell_value:
                 self._first_empty_row_log = counter
                 break
             counter += 1
@@ -202,19 +205,24 @@ class JournalManager:
             self.transport_journal(path)
             self._journal_path = path
 
-    def _write_value(self, col:chr, row:int, value):
+    def _write_value(self,workbook, sheet, col:chr, row:int, value):
         """
         Gets a row and a colum and a value and write it to the trade journal
         """
-        cell = self._trade_log_sheet[col+str(row)]
-        cell.value = str(value)
-        self._trade_journal.save(self._journal_path)
+        sheet.range(col+str(row)).value = str(value)
+        workbook.save()
 
     def write_trade(self, trade):
         """
         Gets a trade object with relevant data and 
         write its contents to the trade journal
         """
+
+        # Creating temp access to the Trade Journal because 
+        # multi-threaded environment binding different xw objects for every thread
+        temp_journal_workbook = xw.Book(self._journal_path)
+        temp_log_sheet = temp_journal_workbook.sheets["Trade Log"]
+
         _, col_counter = self.get_start_fields_idx()
         for attr, value_or_subattr in trade.trade_fields_attr.items():
 
@@ -224,13 +232,13 @@ class JournalManager:
                     value = getattr(getattr(trade, attr), subattr)
                     if value:
                         # Print value to excel file
-                        self._write_value(self._find_col_char(col_counter), self._first_empty_row_log, value)
+                        self._write_value(temp_journal_workbook, temp_log_sheet, self._find_col_char(col_counter), self._first_empty_row_log, value)
                     col_counter += 1
             # Has no subfields
             else:
                 value = getattr(trade, attr)
                 if value:
                     # Print value to excel file
-                    self._write_value(self._find_col_char(col_counter), self._first_empty_row_log, value)
+                    self._write_value(temp_journal_workbook, temp_log_sheet, self._find_col_char(col_counter), self._first_empty_row_log, value)
                 col_counter += 1
         self._first_empty_row_log += 1

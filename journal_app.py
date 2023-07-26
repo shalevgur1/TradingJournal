@@ -101,7 +101,7 @@ def MainApplicationLoop():
 
             t = ConverterObj.IBAPI_to_trade(messages)
             print(t)
-            #JournalManagerObj.write_trade(t)
+            JournalManagerObj.write_trade(t)
 
 
 
