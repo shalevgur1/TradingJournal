@@ -2,7 +2,7 @@
 Trading Journal application for Interactive brokers
 This application is designed to help track your trading information and trading history.
 This application is mainly for tracking your trading, and drawing conclusions from trading history.
-The application utilizes Excel Table that is used as the UI.
+The application is Python-based and utilizes Excel Table as the UI.
 
 The application uses Interactive Brokers python API and can operate with both TWS and IBGW (need to be configured)
 
